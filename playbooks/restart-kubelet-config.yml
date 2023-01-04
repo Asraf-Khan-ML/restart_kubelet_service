@@ -1,0 +1,20 @@
+---
+- hosts: nodes
+  
+  tasks:
+  - name: Restarting K8's node kubelet service
+    systemd: name=kubelet state=restarted enabled=yes
+    become: yes
+
+  - name: Get Kubelet service status
+    shell: service kubelet status | grep active
+    register: status
+
+  - name: Extracting kubelet service status  
+    set_fact:
+      check: "{{ status.stdout.split() }}"
+
+  - name: Status validation for kubelet service
+    fail:
+      msg: "Kubelet service is not running" 
+    when: check[1] != "active" and  check[2] != "(running)"

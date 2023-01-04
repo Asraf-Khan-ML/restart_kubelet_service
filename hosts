@@ -1,0 +1,4 @@
+#Enter VM node host_name,host_ip & host_username
+[nodes]
+# <host_name> <ansible_host=host_ip> ansible_user=<host_username>
+#ip-172-31-178-47.us-west-2.compute.internal ansible_host=172.31.178.47 ansible_user=ubuntu 
